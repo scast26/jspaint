@@ -7,14 +7,17 @@ class OnCanvasSelection extends OnCanvasObject {
 		let last_tool_transparent_mode = tool_transparent_mode;
 		let last_background_color = selected_colors.background;
 		this._on_option_changed = () => {
-			if (!this.source_canvas) {
-				return;
-			}
-			if (last_tool_transparent_mode !== tool_transparent_mode ||
-				last_background_color !== selected_colors.background) {
-				last_tool_transparent_mode = tool_transparent_mode;
-				last_background_color = selected_colors.background;
-				this.update_tool_transparent_mode();
+			if (this.source_canvas) {
+				const tool_transparent_mode_changed =
+					last_tool_transparent_mode !== tool_transparent_mode
+				const background_color_changed =
+					last_background_color !== selected_colors.background
+
+				if (tool_transparent_mode_changed || background_color_changed) {
+					last_tool_transparent_mode = tool_transparent_mode;
+					last_background_color = selected_colors.background;
+					this.update_tool_transparent_mode();
+				}
 			}
 		};
 		$G.on("option-changed", this._on_option_changed);
