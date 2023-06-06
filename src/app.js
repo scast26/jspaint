@@ -103,10 +103,11 @@ const basic_colors = [
 	"#400000", "#804000", "#004000", "#004040", "#000080", "#000040", "#400040", "#400080",
 	"#000000", "#808000", "#808040", "#808080", "#408080", "#C0C0C0", "#400040", "#FFFFFF",
 ];
-let custom_colors = [
-	"#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF",
-	"#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF",
-];
+const custom_colors = [];
+
+for (let i = 0; i < 16; i++) {
+	custom_colors.push("#FFFFFF");
+  };
 
 // This feature is not ready yet.
 // It needs to let the user decide when to switch the palette or not, when saving/opening an image.
