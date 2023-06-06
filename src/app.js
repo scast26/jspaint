@@ -581,32 +581,34 @@ let update_helper_layer_on_pointermove_active = false;
 /** works in client coordinates */
 let pointers = [];
 
+function handleBodyClass(action, className) {
+	if (action == "remove") {
+		$("body").removeClass(className);
+	} else if (action == "add") {
+		$("body").addClass(className);
+	}
+	$G.triggerHandler(className + "-toggled");
+	$G.triggerHandler("theme-load"); // signal layout change
+}
+
 const update_from_url_params = () => {
 	if (location.hash.match(/eye-gaze-mode/i)) {
 		if (!$("body").hasClass("eye-gaze-mode")) {
-			$("body").addClass("eye-gaze-mode");
-			$G.triggerHandler("eye-gaze-mode-toggled");
-			$G.triggerHandler("theme-load"); // signal layout change
+			handleBodyClass("add", "eye-gaze-mode")
 		}
 	} else {
 		if ($("body").hasClass("eye-gaze-mode")) {
-			$("body").removeClass("eye-gaze-mode");
-			$G.triggerHandler("eye-gaze-mode-toggled");
-			$G.triggerHandler("theme-load"); // signal layout change
+			handleBodyClass("remove", "eye-gaze-mode")
 		}
 	}
 
 	if (location.hash.match(/vertical-color-box-mode|eye-gaze-mode/i)) {
 		if (!$("body").hasClass("vertical-color-box-mode")) {
-			$("body").addClass("vertical-color-box-mode");
-			$G.triggerHandler("vertical-color-box-mode-toggled");
-			$G.triggerHandler("theme-load"); // signal layout change
+			handleBodyClass("add", "vertical-color-box-mode")
 		}
 	} else {
 		if ($("body").hasClass("vertical-color-box-mode")) {
-			$("body").removeClass("vertical-color-box-mode");
-			$G.triggerHandler("vertical-color-box-mode-toggled");
-			$G.triggerHandler("theme-load"); // signal layout change
+			handleBodyClass("remove", "vertical-color-box-mode")
 		}
 	}
 
